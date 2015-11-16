@@ -12,19 +12,18 @@ RUN apk add --update-cache \
 	sudo \
 	&& rm -rf /var/cache/apk/*
 
-
 # add nginx user
 RUN addgroup -S nginx && \
-  adduser -S -G nginx -H -h /etc/nginx -s /sbin/nologin -D nginx
+  adduser -S -G nginx -H -h /opt/nginx -s /sbin/nologin -D nginx
 
 COPY bin bin
 RUN build
 
-RUN mkdir /etc/nginx/ssl
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY mime.types /etc/nginx/mime.types
-COPY default /etc/nginx/sites-enabled/default
-COPY default-ssl /etc/nginx/sites-available/default-ssl
+RUN mkdir /opt/nginx/ssl
+COPY nginx.conf /opt/nginx/nginx.conf
+COPY mime.types /opt/nginx/mime.types
+COPY default /opt/nginx/sites-enabled/default
+COPY default-ssl /opt/nginx/sites-available/default-ssl
 
 EXPOSE 80 443
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/opt/nginx/sbin/nginx", "-g", "daemon off;"]

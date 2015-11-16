@@ -11,12 +11,12 @@ export SETMISC_VERSION=0.29
 export BUILD_PATH=/tmp/build
 
 # nginx installation directory
-export PREFIX=/etc/nginx
+export PREFIX=/opt/nginx
 
 rm -rf "$PREFIX"
-mkdir "$PREFIX"
+mkdir -p "$PREFIX"
 
-mkdir "$BUILD_PATH"
+mkdir -p "$BUILD_PATH"
 cd "$BUILD_PATH"
 
 # install required packages to build
@@ -76,6 +76,7 @@ cd "$BUILD_PATH/nginx-$NGINX_VERSION"
   --add-module="$BUILD_PATH/set-misc-nginx-module-$SETMISC_VERSION" \
   --add-module="$BUILD_PATH/nginx-module-vts-$VTS_VERSION" \
   && make && make install
+
 
 rm -rf "$BUILD_PATH"
 apk del --purge \
