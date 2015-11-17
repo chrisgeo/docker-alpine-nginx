@@ -18,11 +18,7 @@ RUN addgroup -S nginx && \
 
 COPY rootfs /
 RUN build
-
-COPY nginx.conf /opt/nginx/nginx.conf
-COPY mime.types /opt/nginx/mime.types
-COPY default /opt/nginx/sites-enabled/default
-COPY default-ssl /opt/nginx/sites-available/default-ssl
+COPY conf /opt/nginx/conf/
 
 EXPOSE 80 443
-CMD ["/opt/nginx/sbin/nginx", "-g", "daemon off;"]
+CMD ["/opt/nginx/sbin/nginx", "-c", "/opt/nginx/conf/nginx.conf"]
