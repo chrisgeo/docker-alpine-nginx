@@ -16,10 +16,9 @@ RUN apk add --update-cache \
 RUN addgroup -S nginx && \
   adduser -S -G nginx -H -h /opt/nginx -s /sbin/nologin -D nginx
 
-COPY bin
+COPY rootfs /
 RUN build
 
-RUN mkdir /opt/nginx/ssl
 COPY nginx.conf /opt/nginx/nginx.conf
 COPY mime.types /opt/nginx/mime.types
 COPY default /opt/nginx/sites-enabled/default
