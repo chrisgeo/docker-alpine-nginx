@@ -16,7 +16,7 @@ RUN apk add --update-cache \
 RUN addgroup -S nginx && \
   adduser -S -G nginx -H -h /opt/nginx -s /sbin/nologin -D nginx
 
-COPY bin bin
+COPY bin
 RUN build
 
 RUN mkdir /opt/nginx/ssl
